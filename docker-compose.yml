@@ -1,0 +1,8 @@
+version: '2'
+services:
+  aym-bk:
+    build: .
+    environment:
+      - PORT=8085
+    ports:
+      - "8085:8085"

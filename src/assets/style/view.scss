@@ -1,0 +1,22 @@
+header {
+    background-color: $--color-header;
+    h1 {
+        color: $--color-title;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+        &:hover,
+        &.router-link-active {
+            color: $--color-nav-active;
+        }
+    }
+}
+
+aside {
+    background-color: $--color-aside;
+}
+
+.login-page {
+    background-color: $--color-login !important;
+}
