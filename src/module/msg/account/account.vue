@@ -51,9 +51,9 @@ export default {
     data() {
         return {
             url: {
-                list: '/api/account/list',
-                detail: '/api/group/accountGroups',
-                num: '/api/account/getNum'
+                list: '/account/list',
+                detail: '/group/accountGroups',
+                num: '/account/getNum'
             },
             search: {
                 nickname: '',

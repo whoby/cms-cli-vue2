@@ -6,18 +6,19 @@ import { Message } from 'element-ui'
 // 跨域允许传cookie
 axios.defaults.credentials = true
 
-// 自定义属性：是否以form格式提交（axios默认发送json格式）
-axios.defaults.isFormType = false
-
 Vue.prototype.ajax = axios
 
-let doAction = function(type, url, params, callback, isNeedAll) {
+// isFormType = 'file' 时，可进行二进制form提交
+const doAction = function(type, url, params, callback, isNeedAll = false, isFormType = false) {
     // 参数处理，get包一层
     if (type === 'get') {
         params = { params: params }
     } else {
-        params = axios.defaults.isFormType ? qs.stringify(params) : params
+        // 只有form（不包括multipart/form-data）类型用qs序列化，
+        params = isFormType === true ? qs.stringify(params) : params
     }
+
+    url = `/api${url}`
 
     // 请求主体
     return axios[type](url, params).then((response) => {
@@ -33,25 +34,32 @@ let doAction = function(type, url, params, callback, isNeedAll) {
             return
         }
 
-        // 自定义处理结果
-        if (isNeedAll) {
-            callback(res)
-        } else {
-            if (res.success) {
-                callback(res.result)
+        // 回调函数里报错会上升到Promise，触发错误catch，所以用try处理
+        try {
+            // 自定义处理结果
+            if (isNeedAll) {
+                callback(res)
+            } else if (res.success) {
+                callback(res.data)
             } else {
                 Message({
                     type: 'warning',
-                    message: res.resultDes || '操作失败！',
+                    message: res.error || '数据返回错误！',
                     showClose: true
                 })
             }
+        } catch (e) {
+            Message({
+                type: 'error',
+                message: String(e),
+                showClose: true
+            })
         }
         return Promise.resolve(response)
     }).catch((error) => {
         Message({
             type: 'error',
-            message: '接口错误，请检查！',
+            message: `Code：[${error.response.status}]，接口错误，请检查！`,
             showClose: true
         })
         return Promise.reject(error)
@@ -59,14 +67,14 @@ let doAction = function(type, url, params, callback, isNeedAll) {
 }
 
 export default {
-    get() {
-        return doAction('get', ...arguments)
+    get(...args) {
+        return doAction('get', ...args)
     },
-    post() {
-        return doAction('post', ...arguments)
+    post(...args) {
+        return doAction('post', ...args)
     },
-    all() {
-        return axios.all([...arguments]).then(axios.spread(function(...res) {
+    all(...args) {
+        return axios.all([...args]).then(axios.spread(function(...res) {
             return Promise.resolve(res)
         })).catch((error) => {
             return Promise.reject(error)

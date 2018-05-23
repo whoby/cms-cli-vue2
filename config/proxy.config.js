@@ -1,9 +1,9 @@
-let RAP_SERVICE = 'http://rap2api.taobao.org/app/mock/13098'
+const RAP_SERVICE = 'http://rap2api.taobao.org/app/mock/13098'
+// const RAP_SERVICE = 'http://192.168.4.102:9999/mockjsdata/262' // 内网rap服务器
 
 module.exports = {
     // RAP服务接口
     proxyTable: {
-        '/vcode': 'http://cpsbk-test.aiyoumi.com:10400',
         '/api/**': RAP_SERVICE
     },
 
