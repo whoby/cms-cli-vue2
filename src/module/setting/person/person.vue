@@ -46,12 +46,12 @@ export default {
     data() {
         return {
             url: {
-                getDetail: '/api/personnel/byId',
-                list: '/api/personnel/list',
-                getDept: '/api/dept/list',
-                del: '/api/personnel/del',
-                add: '/api/personnel/add',
-                edit: '/api/personnel/edit'
+                getDetail: '/personnel/byId',
+                list: '/personnel/list',
+                getDept: '/dept/list',
+                del: '/personnel/del',
+                add: '/personnel/add',
+                edit: '/personnel/edit'
             },
             search: {
                 total: 0,

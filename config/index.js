@@ -2,7 +2,7 @@
 const path = require('path')
 const proxyConfig = require('./proxy.config')
 const pathConfig = require('./path')
-const internalIp = require('internal-ip');
+const internalIp = require('internal-ip')
 
 // 重新组装proxy列表
 const proxyTable = (function(proxyConfig) {
@@ -11,10 +11,10 @@ const proxyTable = (function(proxyConfig) {
         let target = proxyConfig.proxyTable[context]
         arr.push({
             context: context,
-            target: target.indexOf('mockjsdata') < 0 ? target : (proxyConfig.proxyTarget || target),
+            target: target.indexOf('/mock') < 0 ? target : (proxyConfig.proxyTarget || target),
             changeOrigin: true,
             cookieDomainRewrite: proxyConfig.cookieDomain || internalIp.v4(),
-            // pathRewrite: { '^/wcloud': '' }
+            pathRewrite: { '^/api': '' }
         })
     })
     return arr

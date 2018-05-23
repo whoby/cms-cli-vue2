@@ -9,10 +9,6 @@
                 <el-form-item label="密 码：" prop="password">
                     <el-input type="password" v-model="loginForm.password" placeholder="请输入密码" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="验证码：" prop="code" class="vcode">
-                    <el-input v-model="loginForm.code" placeholder="请输入验证码" auto-complete="off"></el-input>
-                    <img :src="vcode" alt="验证码" title="点击验证码" @click="changeVcode">
-                </el-form-item>
                 <el-form-item class="btn-wrap">
                     <el-button type="primary" @click="onLogin">登录</el-button>
                 </el-form-item>
@@ -32,8 +28,7 @@ export default {
             if (value === '') {
                 let info = {
                     username: '请输入用户名',
-                    password: '请输入密码',
-                    code: '请输入验证码'
+                    password: '请输入密码'
                 }
                 callback(new Error(info[rule.field]))
             } else {
@@ -43,14 +38,12 @@ export default {
 
         return {
             url: {
-                login: '/api/doLogin'
+                login: '/doLogin'
             },
             loginForm: {
                 username: '',
-                password: '',
-                code: ''
+                password: ''
             },
-            vcode: '/vcode',
             loginRules: {
                 username: [{
                     validator: validator,
@@ -59,45 +52,24 @@ export default {
                 password: [{
                     validator: validator,
                     trigger: 'blur'
-                }],
-                code: [{
-                    validator: validator,
-                    trigger: 'blur'
                 }]
             }
         }
     },
     methods: {
-        changeVcode: function() {
-            this.vcode = '/vcode?rand=' + (new Date().getTime().toString(36))
-        },
         onLogin() {
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
                     // 加密
                     let params = {
                         username: this.loginForm.username,
-                        password: this.util.encrypt(this.loginForm.password),
-                        code: this.loginForm.code
+                        password: this.util.encrypt(this.loginForm.password)
                     }
                     this.ajax.post(this.url.login, params, (res) => {
-                        if (res.success) {
-                            // 保存登录信息
-                            this.$store.commit('setUsername', this.loginForm.username)
-                            this.$router.push('/index')
-                        } else {
-                            this.$message({
-                                showClose: true,
-                                message: res.resultDes,
-                                type: 'warning'
-                            })
-
-                            this.changeVcode()
-                        }
-                    }, true)
-                } else {
-                    console.log('表单填写不完整，请完善。')
-                    return false
+                        // 保存登录信息
+                        this.$store.commit('setUsername', this.loginForm.username)
+                        this.$router.push('/index')
+                    })
                 }
             })
         }
@@ -113,7 +85,7 @@ export default {
     left: 0;
     .login-box {
         width: 450px;
-        margin: 180px auto;
+        margin: 220px auto;
         padding-right: 50px;
         text-align: center;
         .logo {
@@ -138,17 +110,6 @@ export default {
             left: 325px;
             width: 100px;
             text-align: left;
-        }
-        .vcode {
-            position: relative;
-            img {
-                position: absolute;
-                width: 53px;
-                height: 22px;
-                top: 9px;
-                right: 10px;
-                cursor: pointer;
-            }
         }
         .btn-wrap {
             padding-right: 20px;

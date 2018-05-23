@@ -15,13 +15,18 @@ export default {
         return new RegExp(`^${isFull === false ? '(http[s]?://)?' : 'http[s]?://'}[\\w\\-]+(\\.[\\w\\-]+)+([\\w\\-.,:@?^=%&/~+#]*[\\w\\-@?^=%&/~+#])?$`).test(v)
     },
 
+    // 校验tel
+    isTel(v) {
+        return /^1[3-9]\d{9}$/.test(v)
+    },
+
     // 批量处理对象属性空格
     batchTrim(obj) {
-        for (let key in obj) {
+        Object.keys(obj).forEach((key) => {
             if (typeof obj[key] === 'string') {
                 obj[key] = obj[key].trim()
             }
-        }
+        })
         return obj
     },
 

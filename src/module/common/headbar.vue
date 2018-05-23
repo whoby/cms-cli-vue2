@@ -44,7 +44,7 @@ export default {
                     this.$store.commit('setMenuList', this.menuList)
                 } else {
                     // ajax获取权限数据
-                    this.ajax.post('/api/loadMenu', {}, (res) => {
+                    this.ajax.post('/loadMenu', {}, (res) => {
                         this.$store.commit('setMenuList', res)
                     })
                 }
@@ -56,7 +56,7 @@ export default {
             let params = {
                 cmd: 'logout'
             }
-            this.ajax.post('/api/doLogin', params, (res) => {
+            this.ajax.post('/doLogin', params, (res) => {
                 // 保存登录信息
                 this.$store.commit('setUsername', '')
                 this.$router.push('/login')

@@ -150,17 +150,17 @@ export default {
     data() {
         return {
             url: {
-                list: '/api/task/list',
-                typeList: '/api/task/type/list',
-                add: '/api/task/add',
-                detail: '/api/task/detail',
-                sendDetail: '/api/task/sendDetail',
-                reSend: '/api/task/reSend',
-                start: '/api/task/start',
-                pause: '/api/task/pause',
-                close: '/api/task/close',
-                groupList: '/api/group/groupList',
-                varsList: '/api/variable/variableList'
+                list: '/task/list',
+                typeList: '/task/type/list',
+                add: '/task/add',
+                detail: '/task/detail',
+                sendDetail: '/task/sendDetail',
+                reSend: '/task/reSend',
+                start: '/task/start',
+                pause: '/task/pause',
+                close: '/task/close',
+                groupList: '/group/groupList',
+                varsList: '/variable/variableList'
             },
             stack: {
                 msgTypes: [],
