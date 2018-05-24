@@ -7,13 +7,13 @@ let menuList = sessionStorage.getItem('menuList')
 
 export default new Vuex.Store({
     state: {
-        username: sessionStorage.getItem('username') || '',
+        userName: sessionStorage.getItem('userName') || '',
         menuList: (menuList && JSON.parse(menuList)) || []
     },
     mutations: {
-        setUsername(state, data) {
+        setUserName(state, data) {
             state.username = data
-            sessionStorage.setItem('username', data)
+            sessionStorage.setItem('userName', data)
         },
         setMenuList(state, data) {
             state.menuList = data

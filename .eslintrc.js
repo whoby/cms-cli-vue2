@@ -5,11 +5,10 @@ module.exports = {
         parser: 'babel-eslint'
     },
     env: {
-        browser: true,
+        browser: true
     },
     globals: {
-        window: true,
-        '__webpack_public_path__': true
+        window: true
     },
     extends: [
         // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
@@ -29,6 +28,7 @@ module.exports = {
         // allow async-await
         'generator-star-spacing': 'off',
         'indent': ['error', 4],
+        'eol-last': 0,
         // allow debugger during development
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
     }
