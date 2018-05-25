@@ -26,7 +26,7 @@ export default {
             let sideMenu = []
 
             menuList.some(function(item1) {
-                if (curPath === item1.path) {
+                if (curPath.indexOf(item1.path) === 0) {
                     sideMenu = item1.children
                     return true
                 }

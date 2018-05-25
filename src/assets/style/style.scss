@@ -51,6 +51,9 @@ label {
     }
     .el-form-item {
         margin-bottom: 18px;
+        label {
+            min-width: 135px;
+        }
         .el-input, .el-textarea {
             width: 300px;
         }

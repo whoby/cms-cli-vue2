@@ -3,8 +3,8 @@
         <div class="login-box" @keydown.enter="onLogin">
             <div class="logo">通用后台管理系统</div>
             <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-width="80px">
-                <el-form-item label="用户名：" prop="username">
-                    <el-input v-model="loginForm.username" placeholder="请输入用户名" auto-complete="off"></el-input>
+                <el-form-item label="用户名：" prop="userName">
+                    <el-input v-model="loginForm.userName" placeholder="请输入用户名" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="密 码：" prop="password">
                     <el-input type="password" v-model="loginForm.password" placeholder="请输入密码" auto-complete="off"></el-input>
@@ -20,14 +20,14 @@
 export default {
     name: 'login',
     mounted() {
-        this.$store.commit('setUsername', '')
+        this.$store.commit('setUserName', '')
     },
     data() {
         // 验证信息
         let validator = (rule, value, callback) => {
             if (value === '') {
                 let info = {
-                    username: '请输入用户名',
+                    userName: '请输入用户名',
                     password: '请输入密码'
                 }
                 callback(new Error(info[rule.field]))
@@ -41,11 +41,11 @@ export default {
                 login: '/doLogin'
             },
             loginForm: {
-                username: '',
+                userName: '',
                 password: ''
             },
             loginRules: {
-                username: [{
+                userName: [{
                     validator: validator,
                     trigger: 'blur'
                 }],
@@ -62,12 +62,12 @@ export default {
                 if (valid) {
                     // 加密
                     let params = {
-                        username: this.loginForm.username,
+                        userName: this.loginForm.userName,
                         password: this.util.encrypt(this.loginForm.password)
                     }
                     this.ajax.post(this.url.login, params, (res) => {
                         // 保存登录信息
-                        this.$store.commit('setUsername', this.loginForm.username)
+                        this.$store.commit('setUserName', this.loginForm.userName)
                         this.$router.push('/index')
                     })
                 }
@@ -99,6 +99,7 @@ export default {
             background: url(../../assets/img/login-logo.png) no-repeat center;
         }
         label {
+            min-width: 90px;
             color: #C5DFE6;
         }
         .el-input {

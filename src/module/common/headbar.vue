@@ -5,7 +5,7 @@
             <router-link :to="item.path" v-for="(item, i) in menuList" :key="i">{{ item.title }}</router-link>
         </nav>
         <div class="info fr" v-if="isLogin">
-            欢迎您<strong>{{ username }}</strong> | <a href="javascript:;" @click="onLogout">退出</a>
+            欢迎您<strong>{{ userName }}</strong> | <a href="javascript:;" @click="onLogout">退出</a>
         </div>
     </header>
 </template>
@@ -17,13 +17,13 @@ export default {
     },
     data() {
         return {
-            isLogin: !!this.$store.state.username,
+            isLogin: !!this.$store.state.userName,
             menuList: []
         }
     },
     computed: {
-        username() {
-            return this.$store.state.username
+        userName() {
+            return this.$store.state.userName
         }
     },
     methods: {
@@ -58,7 +58,7 @@ export default {
             }
             this.ajax.post('/doLogin', params, (res) => {
                 // 保存登录信息
-                this.$store.commit('setUsername', '')
+                this.$store.commit('setUserName', '')
                 this.$router.push('/login')
             })
         }
