@@ -12,7 +12,7 @@ export default new Vuex.Store({
     },
     mutations: {
         setUserName(state, data) {
-            state.username = data
+            state.userName = data
             sessionStorage.setItem('userName', data)
         },
         setMenuList(state, data) {

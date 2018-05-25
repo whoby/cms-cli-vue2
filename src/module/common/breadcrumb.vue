@@ -1,6 +1,6 @@
 <template>
     <div class="breadcrumb">
-        <span v-for="(item, i) in breadNames" :key="i">{{ item }}<i class="part" v-if="i !== breadNames.length-1">&gt;</i></span>
+        <span v-for="(item, i) in breadNames" :key="i">{{ item }}<i class="part" v-if="i !== breadNames.length-1">/</i></span>
     </div>
 </template>
 <script>
