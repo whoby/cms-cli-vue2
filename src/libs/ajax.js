@@ -27,7 +27,7 @@ const doAction = function(type, url, params, callback, isNeedAll = false, isForm
         if (res.code && res.code === '-1999') {
             Message({
                 type: 'warning',
-                message: res.error.message || '请先登录！',
+                message: res.error || '请先登录！',
                 showClose: true
             })
             window.location.href = window.location.origin + '#/login'
