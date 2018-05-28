@@ -1,5 +1,5 @@
 <template>
-    <el-cascader ref="cascader" :options="distData" :props="props" :value="distValue" @active-item-change="onProvinceChange" @change="onSelectChange" clearable class="distPicker"></el-cascader>
+    <el-cascader :options="distData" :props="props" :value="distValue" @active-item-change="onProvinceChange" @change="onSelectChange" clearable class="distPicker"></el-cascader>
 </template>
 <script>
 export default {
@@ -41,6 +41,16 @@ export default {
     },
     methods: {
         initProvince() {
+            this.distData = this.$store.state.provinces || []
+            if (this.distData.length) {
+                // 需要回显城市
+                if (this.distValue.length > 1) {
+                    this.onProvinceChange([this.distValue[0]])
+                }
+                return
+            }
+
+            // 第一次才去加载
             this.ajax.post('/common/provinces', {}, (res) => {
                 this.distData = res.map(item => {
                     return {
@@ -50,7 +60,9 @@ export default {
                     }
                 })
 
-                // 需求回显城市
+                this.$store.commit('setProvinces', this.distData)
+
+                // 需要回显城市
                 if (this.distValue.length > 1) {
                     this.onProvinceChange([this.distValue[0]])
                 }
