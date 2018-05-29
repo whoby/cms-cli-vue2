@@ -1,6 +1,6 @@
 <template>
     <div class="breadcrumb">
-        <span v-for="(item, i) in breadNames" :key="i">{{ item }}<i class="part" v-if="i !== breadNames.length-1">/</i></span>
+        首页<span v-for="(item, i) in breadNames" :key="i"><i class="separator">/</i>{{ item }}</span>
     </div>
 </template>
 <script>
@@ -51,14 +51,15 @@ export default {
 </script>
 <style lang="scss">
 .breadcrumb {
-    padding: 8px 15px;
+    padding: 12px 15px;
     margin-bottom: 20px;
     list-style: none;
     background-color: #f5f5f5;
     border-radius: 4px;
+    color: rgba(0, 0, 0, 0.45);
     font-size: 14px;
-    .part {
-        margin: 0 6px;
+    .separator {
+        margin: 0 8px;
         font-style: normal;
     }
 }

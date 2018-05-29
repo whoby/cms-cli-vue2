@@ -79,10 +79,10 @@ export default {
     data() {
         return {
             url: {
-                list: '/config/recCode/list',
-                save: '/config/recCode/save',
-                del: '/config/recCode/delete',
-                detail: '/config/recCode/get'
+                list: '/custom/info/list',
+                save: '/custom/info/save',
+                del: '/custom/info/delete',
+                detail: '/custom/info/detail'
             },
             stack: {
                 validTypes: [{
