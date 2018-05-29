@@ -52,7 +52,7 @@ export default {
 
             // 第一次才去加载
             this.ajax.post('/common/provinces', {}, (res) => {
-                this.distData = res.map(item => {
+                this.distData = res.list.map(item => {
                     return {
                         name: item.province,
                         code: item.code,
@@ -80,7 +80,7 @@ export default {
                         }
 
                         // 找出当前省份下的城市
-                        item1.cities = res.map(item2 => {
+                        item1.cities = res.list.map(item2 => {
                             return {
                                 code: item2.code,
                                 name: item2.city
