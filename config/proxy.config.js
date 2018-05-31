@@ -1,5 +1,5 @@
 // const RAP_SERVICE = 'http://192.168.4.102:9999/mockjsdata/262' // 内网rap服务器
-const RAP_SERVICE = 'http://rapapi.org/mockjsdata/9051' // 淘宝rap服务器
+const RAP_SERVICE = 'http://rap2api.taobao.org/app/mock/14718' // 淘宝rap服务器
 
 module.exports = {
     // RAP服务接口

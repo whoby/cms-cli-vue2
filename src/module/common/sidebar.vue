@@ -24,29 +24,35 @@ export default {
             let menuList = this.$store.state.menuList
             let curPath = this.util.routePath(this.$route)
             let sideMenu = []
+            let breadNames = []
 
-            menuList.some(function(item1) {
-                if (curPath.indexOf(item1.path) === 0) {
-                    sideMenu = item1.children
+            // 获取左侧菜单
+            menuList.some(function(item) {
+                if (curPath.indexOf(item.path) === 0) {
+                    breadNames.push(item.title)
+                    sideMenu = item.children
+                    return true
+                }
+            })
+
+            // 获取面包屑
+            sideMenu.some(function(item1) {
+                if (curPath === item1.path) {
+                    breadNames.push(item1.title)
                     return true
                 }
 
-                let child1 = item1.children || []
-                child1.some(function(item2) {
+                let child = item1.children || []
+                child.some(function(item2) {
                     if (curPath === item2.path) {
-                        sideMenu = item1.children
+                        breadNames.push(item1.title, item2.title)
                         return true
                     }
-
-                    let child2 = item1.children || []
-                    child2.some(function(item3) {
-                        if (curPath === item3.path) {
-                            sideMenu = item1.children
-                            return true
-                        }
-                    })
                 })
             })
+
+            // 保存面包屑
+            this.$store.commit('setBreadNames', breadNames)
 
             return sideMenu
         }

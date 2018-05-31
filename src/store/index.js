@@ -10,6 +10,7 @@ export default new Vuex.Store({
     state: {
         userName: sessionStorage.getItem('userName') || '',
         menuList: (menuList && JSON.parse(menuList)) || [],
+        breadNames: [],
         provinces: (provinces && JSON.parse(provinces)) || []
     },
     mutations: {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
         setMenuList(state, data) {
             state.menuList = data
             sessionStorage.setItem('menuList', JSON.stringify(data))
+        },
+        setBreadNames(state, data) {
+            state.breadNames = data
         },
         setProvinces(state, data) {
             state.provinces = data

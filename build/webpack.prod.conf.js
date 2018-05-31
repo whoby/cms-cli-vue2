@@ -61,7 +61,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         new HtmlWebpackPlugin({
             filename: config.build.index,
             template: 'index.html',
-            favicon:'./static/favicon.ico',
+            favicon: './static/favicon.ico',
             inject: true,
             minify: {
                 removeComments: true,
@@ -101,7 +101,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         // in a separate chunk, similar to the vendor chunk
         // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'app',
+            name: 'main',
             async: 'vendor-async',
             children: true,
             minChunks: 3
