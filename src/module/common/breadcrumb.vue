@@ -1,7 +1,7 @@
 <template>
     <el-breadcrumb separator="/" class="breadcrumb">
         <el-breadcrumb-item>首页</el-breadcrumb-item>
-        <el-breadcrumb-item v-for="(item, i) in $store.state.breadNames" :key="i">{{item}}</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="(item, i) in $store.state.breadNames" :key="i">{{ item }}</el-breadcrumb-item>
     </el-breadcrumb>
 </template>
 <script>
