@@ -1,52 +1,12 @@
 <template>
-    <div class="breadcrumb">
-        首页<span v-for="(item, i) in breadNames" :key="i"><i class="separator">/</i>{{ item }}</span>
-    </div>
+    <el-breadcrumb separator="/" class="breadcrumb">
+        <el-breadcrumb-item>首页</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="(item, i) in $store.state.breadNames" :key="i">{{item}}</el-breadcrumb-item>
+    </el-breadcrumb>
 </template>
 <script>
 export default {
-    name: 'breadcrumb',
-    computed: {
-        breadNames() {
-            let menuList = this.$store.state.menuList
-            let curPath = this.util.routePath(this.$route)
-            let breadNames = []
-
-            // 通过当前路由path获取一二三级菜单名
-            menuList.some(function(item1) {
-                if (curPath === item1.path) {
-                    breadNames.push(item1.title)
-                    return true
-                }
-
-                let child1 = item1.children || []
-                child1.some(function(item2) {
-                    if (curPath === item2.path) {
-                        breadNames.push(item1.title, item2.title)
-                        return true
-                    }
-
-                    let child2 = item2.children || []
-                    child2.some(function(item3) {
-                        if (curPath === item3.path) {
-                            breadNames.push(item1.title, item2.title, item3.title)
-                            return true
-                        }
-                    })
-
-                    if (breadNames.length) {
-                        return true
-                    }
-                })
-
-                if (breadNames.length) {
-                    return true
-                }
-            })
-
-            return breadNames
-        }
-    }
+    name: 'breadcrumb'
 }
 </script>
 <style lang="scss">
@@ -58,9 +18,5 @@ export default {
     border-radius: 4px;
     color: rgba(0, 0, 0, 0.45);
     font-size: 14px;
-    .separator {
-        margin: 0 8px;
-        font-style: normal;
-    }
 }
 </style>

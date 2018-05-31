@@ -11,6 +11,7 @@ import { Message } from 'element-ui'
 // 跨域允许传cookie
 axios.defaults.credentials = true
 
+// 全局挂载ajax
 Vue.prototype.ajax = axios
 
 const doAction = (type, url, params, callback, opts) => {
