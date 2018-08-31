@@ -1,0 +1,37 @@
+/*
+ * 主题色选择
+ * 可选项：['blue','black','green']
+ */
+
+/* 根据上面的选项，修改并加载相应的主题 */
+@import './theme/black.scss';
+
+/* 改变icon字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+/* element scss */
+@import '~element-ui/packages/theme-chalk/src/index';
+
+/* 框架页面配色 */
+header {
+    background-color: $--color-header;
+    h1 {
+        color: $--color-title;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+        &:hover,
+        &.router-link-active {
+            color: $--color-nav-active;
+        }
+    }
+}
+
+aside {
+    background-color: $--color-aside;
+}
+
+.login-page {
+    background-color: $--color-login !important;
+}
