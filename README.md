@@ -1,5 +1,7 @@
 # backend
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/whoby/backend-element-vue.svg)](https://greenkeeper.io/)
+
 ## Project setup
 ```
 npm install
