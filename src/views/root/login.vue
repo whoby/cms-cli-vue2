@@ -45,27 +45,31 @@ export default {
                 password: ''
             },
             loginRules: {
-                userName: [{
-                    validator: validator,
-                    trigger: 'blur'
-                }],
-                password: [{
-                    validator: validator,
-                    trigger: 'blur'
-                }]
+                userName: [
+                    {
+                        validator: validator,
+                        trigger: 'blur'
+                    }
+                ],
+                password: [
+                    {
+                        validator: validator,
+                        trigger: 'blur'
+                    }
+                ]
             }
         }
     },
     methods: {
         onLogin() {
-            this.$refs.loginForm.validate(valid => {
+            this.$refs.loginForm.validate((valid) => {
                 if (valid) {
                     // 加密
                     let params = {
                         userName: this.loginForm.userName,
                         password: this.$util.encrypt(this.loginForm.password)
                     }
-                    this.$ajax.post(this.url.login, params, res => {
+                    this.$ajax.post(this.url.login, params, (res) => {
                         // 保存登录信息
                         this.$store.commit('setUserName', this.loginForm.userName)
                         this.$router.push('/index')
@@ -83,6 +87,9 @@ export default {
     top: 0;
     bottom: 0;
     left: 0;
+    background: url(../../assets/img/login-bg1.webp) no-repeat center;
+    background-blend-mode: multiply;
+    background-size: cover;
     .login-box {
         width: 450px;
         margin: 160px auto;
@@ -100,7 +107,7 @@ export default {
         }
         label {
             min-width: 90px !important;
-            color: #C5DFE6;
+            color: #c5dfe6;
         }
         .el-input {
             width: 300px;

@@ -8,7 +8,8 @@ export default new Vuex.Store({
     state: {
         userName: '',
         menuList: [],
-        breadNames: []
+        breadNames: [],
+        provinces: []
     },
     mutations: {
         setUserName(state, data) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
         },
         setBreadNames(state, data) {
             state.breadNames = data
+        },
+        setProvinces(state, data) {
+            state.provinces = data
         }
     },
     modules: {},

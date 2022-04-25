@@ -60,8 +60,8 @@ export default {
             }
 
             // 第一次才去加载
-            this.$ajax.post('/common/provinces', {}, (res) => {
-                this.distData = res.map(item => {
+            this.$ajax.get('/common/provinces', {}, (res) => {
+                this.distData = res.map((item) => {
                     return {
                         name: item.province,
                         code: item.code,
@@ -79,7 +79,7 @@ export default {
         },
         onProvinceChange(values) {
             let provinceCode = values[0]
-            this.$ajax.post('/common/citys', { provinceCode }, (res) => {
+            this.$ajax.get('/common/citys', { provinceCode }, (res) => {
                 this.distData.some((item1, index) => {
                     if (item1.code === provinceCode) {
                         // 保存当前省份数据
@@ -101,7 +101,7 @@ export default {
                         }
 
                         // 找出当前省份下的城市
-                        item1.cities = res.map(item2 => {
+                        item1.cities = res.map((item2) => {
                             return {
                                 code: item2.code,
                                 name: item2.city
@@ -125,7 +125,7 @@ export default {
                 let cityCode = values[1]
 
                 // 根据code从当前所有省份城市中找出选择的城市完整信息
-                this.stack.cities.some(item => {
+                this.stack.cities.some((item) => {
                     if (item.code === cityCode) {
                         this.selected.city = {
                             code: item.code,
